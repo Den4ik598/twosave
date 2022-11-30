@@ -1,0 +1,6 @@
+[
+
+    {"cc":"EUR","symbol":"\u20ac","name":"European Euro"},
+    {"cc":"RUB","symbol":"\u20bd","name":"Russian ruble"},
+    {"cc":"USD","symbol":"$","name":"United States dollar"}
+  ]

@@ -1,0 +1,86 @@
+body {
+    background: #342f8e;
+    display: flex;
+    flex-direction: row;
+
+}
+
+aside {
+    float: left;
+    background: #181818;
+    width: 20%;
+    padding: 2.5%;
+    height: 100vh;
+    color: #fff;
+    border-right: 2px solid #4d4d4d;
+}
+
+aside img {
+    width: 60px;
+    float: left;
+}
+
+aside .logo {
+    font-size: 12px;
+    position: relative;
+    font-weight: bold;
+    top: 15px;
+}
+
+aside h3 {
+    margin-top: 30px;
+    font-siza: 28px;
+}
+
+aside ul {list-style: None}
+aside ul li {
+    color: #b3d7f0;
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: transform .5s ease;
+}
+
+aside ul li:hover, aside ul a:hover {
+    color: #eb5959;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.button{
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.button__title{
+    width: auto;
+    margin: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button__area{
+    width: auto;
+    margin: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button__click{
+    width: 4rem;
+    height: 2rem;
+}
+
+.Top {
+    position: relative;
+    float: left;
+    width: 75%;
+
+}

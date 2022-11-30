@@ -1,0 +1,41 @@
+{% extends 'main/lays.html' %}
+ {% block content %}
+    <div class="container">
+         <h1>Currency Converter</h1>
+         <form method="post" action="{% url 'Table' %}">
+         {% csrf_token %}
+         <!-- Amount input -->
+		 <div class="select-text">
+            <input  name="amount" type="text">
+         </div>
+         <br>
+
+		 <div class="select-wrapper">
+			<!-- From options -->
+            <select name="currency_from" class="select">
+               {% for c in currency_data %}
+               <option value="{{c.cc}}">{{c.name}}</option>
+               {% endfor %}
+            </select>
+         </div>
+         <br>
+         <div class="select-wrapper">
+			<!-- To options -->
+            <select name="currency_to" class="select">
+               {% for c in currency_data %}
+               <option value="{{c.cc}}">{{c.name}}</option>
+               {% endfor %}
+            </select>
+         </div>
+         <br>
+          <p><b>выберите операцию</b></p>
+             <p><input type="radio" name="oplata" value="sale">продажа</p>
+             <p><input type="radio" name="oplata" value="puy">покупка</p>
+         <div class="select-submit">
+            <input type="submit" value="Convert">
+         </div>
+         <!-- Converter result -->
+         <h2>{{ result }} {{ currency_to }}</h2>
+    </div>
+{% endblock %}
+
