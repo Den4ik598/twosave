@@ -1,0 +1,33 @@
+{% extends 'main/lays.html' %}
+{% load  widget_tweaks %}
+{% block content %}
+    <div class="container">
+    <br><br><br>
+
+        <table class="table table-bordered" id="example" style="text-align: center;">
+            <thead class="table success">
+            <tr>
+                <th>ID</th>
+                <th>фамилия</th>
+                <th> номер и серия паспорта</th>
+                <th>Номер Телефона</th>
+                <th>ИНН</th>
+
+            </tr>
+            </thead>
+            {% for i in People %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.username }}</td>
+                <td>{{ i.number}}</td>
+                <td>{{i.phone}}</td>
+                <td>{{ i.Inn}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'add_People' %}" class="btn btn-outline-secondary btn-sn"><i class="fas fa-plus"></i>&nbsp;&nbsp; Add People</a>
+    </div>
+
+<br><br><br><br>
+
+{% endblock %}

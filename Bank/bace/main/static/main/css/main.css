@@ -1,5 +1,5 @@
 body {
-    background: #342f8e;
+    background: #345f8e;
     display: flex;
     flex-direction: row;
 
@@ -83,4 +83,19 @@ aside ul li:hover, aside ul a:hover {
     float: left;
     width: 75%;
 
+}
+
+.side-label {
+    width: 45 px;
+}
+
+.select{
+ background-color: #201e1e;
+ padding: 20px;
+ color: #fff;
+ font-weight: 500;
+ border-radius: 6px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
 }

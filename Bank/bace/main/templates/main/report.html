@@ -2,4 +2,36 @@
 
 {% block content %}
     <h1 style="color: #b3d7f0;">очтеты</h1>
+<div class="container">
+    <br><br><br>
+
+        <table class="table table-bordered" id="example" style="text-align: center;">
+            <thead class="table success">
+            <tr>
+                <th>Name_Currency</th>
+                <th>Curs_BANK</th>
+                <th>Kurs_sell</th>
+                <th>Kurs_buy</th>
+                <th>number_of_currency</th>
+                <th>data</th>
+            </tr>
+            </thead>
+            {% for i in Food %}
+            <tr>
+                <td>{{ i.Name_Currency }}</td>
+                <td>{{ i.Curs_BANK }}</td>
+                <td>{{ i.Kurs_sell}}</td>
+                <td>{{ i.Kurs_buy}}</td>
+                <td>{{ i.number_of_currency}}</td>
+                <th>{{i.Date}}</th>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
+<br><br><br><br>
+    <ul>
+            <a href="{%url 'delete' %}"><i class="fa fa-trash"></i></a>
+            <a href="{%url 'ex' %}"><i class="fa fa-regular fa-clipboard"></i></a>
+    <ul>
+
 {% endblock %}
