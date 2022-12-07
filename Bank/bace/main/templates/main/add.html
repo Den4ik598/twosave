@@ -1,7 +1,7 @@
 {% extends 'main/lays.html' %}
 {% load  widget_tweaks %}
 {% block content %}
-<div class="container">
+<div class="container_add_people">
     <div class="row">
         <div class="col-lg12">
             <div class="card card-body nt-5 {% block card-color %} border-dark text-light bd-secondary {% endblock card-color %}">
@@ -14,22 +14,22 @@
         {% block value-id %}{% endblock value-id %}
         <div class="input-group mb-3">
             <span class="side-label btn border-secondary bg-light" ><i class="fas fa-tshirt"></i></span>
-            <input type="text" class="form-control" name="username" maxlength="40" placeholder="People username " required {% block value-username  %}{% endblock value-username  %}>
+            <input type="text" class="form-control" name="username" maxlength="40" pattern="^[А-Яа-яЁё]+$" placeholder="People username " required {% block value-username  %}{% endblock value-username  %}>
         </div>
 
         <div class="input-group mb-3">
             <span class="side-label btn border-secondary bg-light" ><i class="fas fa-tshirt"></i></span>
-            <input type="numbert" class="form-control" name="number" maxlength="40" placeholder="number" required {% block value-number %}{% endblock value-number %}>
+            <input type="number" class="form-control" name="number" max="99999999999" placeholder="number" required {% block value-number %}{% endblock value-number %}>
         </div>
 
         <div class="input-group mb-3">
             <span class="side-label btn border-secondary bg-light" ><i class="fas fa-tshirt"></i></span>
-            <input type="number" class="form-control" name="phone" maxlength="40" placeholder="phone" required {% block value-phone %}{% endblock value-phone %}>
+            <input type="number" class="form-control" name="phone" maxlength="99999999999" placeholder="phone" required {% block value-phone %}{% endblock value-phone %}>
         </div>
 
         <div class="input-group mb-3">
             <span class="side-label btn border-secondary bg-light" ><i class="fas fa-tshirt"></i></span>
-            <input type="number" class="form-control" name="Inn" maxlength="40" placeholder="Inn" required {% block value-Inn %}{% endblock value-Inn %}>
+            <input type="number" class="form-control" name="Inn" maxlength="999999999999" placeholder="Inn" required {% block value-Inn %}{% endblock value-Inn %}>
         </div>
 
 

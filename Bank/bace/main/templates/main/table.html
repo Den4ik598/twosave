@@ -1,12 +1,12 @@
 {% extends 'main/lays.html' %}
  {% block content %}
-    <div class="container">
-         <h1>Currency Converter</h1>
+   <div class="container_table">
          <form method="post" action="{% url 'Table' %}">
          {% csrf_token %}
          <!-- Amount input -->
 		 <div class="select-text">
             <input  name="amount" type="number" REQUIRED>
+            <span>валюта</span>
          </div>
          <br>
 
@@ -28,14 +28,16 @@
             </select>
          </div>
          <br>
-          <p><b>выберите операцию</b></p>
-             <p><input type="radio" name="oplata" value="sale">продажа</p>
-             <p><input type="radio" name="oplata" value="puy">покупка</p>
-         <div class="select-submit">
+          <p class = "text_vibor"><b>выберите операцию</b></p>
+          <ul class = "inlineList">
+             <li><input type="radio" name="oplata" value="sale">продажа</li>
+             <li><input type="radio" name="oplata" value="puy">покупка</li>
+          </ul>
+         <div class="select-submit_table">
             <input type="submit" value="Convert">
          </div>
          <!-- Converter result -->
          <h2>{{ result }} {{ currency_to }}</h2>
-    </div>
+   </div>
 {% endblock %}
 

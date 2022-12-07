@@ -10,5 +10,5 @@ urlpatterns = [
     path('add_People',views.add_People, name = "add_People"),
     path('delete',views.function, name= 'delete'),
     path('ex',views.ex, name= 'ex'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
