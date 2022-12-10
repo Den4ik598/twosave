@@ -1,6 +1,11 @@
 {% extends 'main/lays.html' %}
 
 {% block content %}
+<ul>
+    <a href="{%url 'delete' %}"><i class="fa fa-trash"></i></a>
+    <a href="{%url 'ex' %}"><i class="fas fa-file-excel"></i></a>
+<ul>
+
 <div class="container_report">
     <br><br><br>
 
@@ -28,9 +33,5 @@
         </table>
 </div>
 <br><br><br><br>
-    <ul>
-            <a href="{%url 'delete' %}"><i class="fa fa-trash"></i></a>
-            <a href="{%url 'ex' %}"><i class="fa fa-regular fa-clipboard"></i></a>
-    <ul>
-
+   
 {% endblock %}

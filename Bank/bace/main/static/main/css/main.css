@@ -6,8 +6,11 @@
 }
 
 header{
+    position: relative;
     height: 90px;
+    z-index: 2;
     background: #2f3640;
+    
 }
 
 .logo_name{
@@ -118,24 +121,45 @@ header{
     
     .navigation-menu.active{
         display: block;
+        z-index: 2;
     }
 }
 
 .container_table{
     
-    position: absolute;
+    position: fixed;
     display: flex;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }
+    z-index: 1;
     
 }
 
+.Convert1{ 
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: #172b4d;
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    transition: 0.5s;
+}
+
+.h2Result{
+    width: 100%;
+    padding: 10px 00px 0px 90px;
+    position: absolute;
+    
+}
+
+
 .select-text{
     position: relative;
-    width: 250px; 
+     
 }
 
 .select-text input{
@@ -149,6 +173,7 @@ header{
     font-size: 1em;
     transition: 0.5s;
 }
+
 
 .select-text span{
     position: absolute;
@@ -235,4 +260,26 @@ header{
     padding-top: 5px;
     padding-left: 100px;
     padding-right: 50px;
+}
+
+.fa-trash {
+  display: inline-block;
+  vertical-align: right;
+ 
+  padding: 10px 0px 0px 5px;
+  color: red;
+  margin: 0 ;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+}
+.fa-file-excel{
+  display: inline-block;
+  vertical-align:  right;
+  color: green;
+  padding: 10px 0px 0px 0px;
+  margin: 0 ;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
 }
