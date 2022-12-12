@@ -20,24 +20,20 @@ def currency_data():
 
 def ex(request):
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename = Expenses' + \
-                                      str(datetime.datetime.now())+'.xls'
+    response['Content-Disposition'] = 'attachment; filename = Expenses' + str(datetime.datetime.now())+'.xls'
     wb = xlwt.Workbook(encoding='utf-8')
     ws=wb.add_sheet('Expenses')
     row_num = 0
     font_style = xlwt.XFStyle()
     font_style.font.bold = True
 
-    columns= ['Name_Currency', 'ex_target', 'Curs_BANK', 'Kurs_buy',
-                                 'number_of_currency', 'Date']
+    columns= ['Name_Currency', 'ex_target', 'Curs_BANK', 'Kurs_buy','number_of_currency', 'Date']
 
-    for col_num in range(len(columns)):
-        ws.write(row_num,col_num,columns[col_num],font_style)
+    for col_num in range(len(columns)): ws.write(row_num,col_num,columns[col_num],font_style)
 
     font_style = xlwt.XFStyle()
 
-    rows = Food.objects.all().values_list('Name_Currency', 'Curs_BANK', 'Kurs_sell', 'Kurs_buy',
-                                 'number_of_currency', 'Date')
+    rows = Food.objects.all().values_list('Name_Currency', 'Curs_BANK', 'Kurs_sell', 'Kurs_buy','number_of_currency', 'Date')
 
     for row in rows:
         row_num += 1
@@ -47,6 +43,8 @@ def ex(request):
     wb.save(response)
 
     return response
+
+    
 def function(request):
     object = Food.objects.all()
     object.delete()
@@ -74,18 +72,14 @@ def add_People(request):
 def index1(request):
     if request.method == "POST":
         error = ''
-        # Get data from the html form
         amount = float(request.POST.get('amount'))
         currency_from = request.POST.get("currency_from")
         currency_to = request.POST.get("currency_to")
         radio = request.POST.get("oplata")
-        # Get currency exchange rates
         url = f"https://open.er-api.com/v6/latest/{currency_from}"
         d = requests.get(url).json()
         Date = datetime.datetime.today().replace(microsecond=0,second=0)
-        # Converter
         if d["result"] == "success":
-            # Get currency exchange of the target
             ex_target = d["rates"][currency_to]
             if radio == "sale":
                 result = ex_target * amount * 1.03
@@ -93,7 +87,6 @@ def index1(request):
             else:
                 result = ex_target * amount * 1.01
 
-            # Set 2 decimal places
             result = "{:.2f}".format(result)
             a = ex_target * amount * 1.03
             b = ex_target * amount * 1.01
