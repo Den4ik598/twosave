@@ -19,27 +19,42 @@ def currency_data():
 
 
 def ex(request):
-    response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename = Expenses' + str(datetime.datetime.now())+'.xls'
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename = Отчет по ' + str(datetime.datetime.now())+'.xls'
     wb = xlwt.Workbook(encoding='utf-8')
-    ws=wb.add_sheet('Expenses')
-    row_num = 0
-    font_style = xlwt.XFStyle()
-    font_style.font.bold = True
+    ws=wb.add_sheet('Отчет',cell_overwrite_ok = True)
+    row_number = 0
+    font = xlwt.Font()
+    font.name = 'name Times New Roman'
+    font.height = 20 * 12
+    aligment = xlwt.Alignment()
+    aligment.horz = 0x02
+    aligment.vert = 0x01
+    borders = xlwt.Borders()
+    borders.left = 2
+    borders.right = 2
+    borders.top = 2
+    borders.bottom = 2
+    style_perfect = xlwt.XFStyle()
+    style_perfect.font = font
+    style_perfect.alignment= aligment
+    style_perfect.borders = borders
 
-    columns= ['Name_Currency', 'ex_target', 'Curs_BANK', 'Kurs_buy','number_of_currency', 'Date']
 
-    for col_num in range(len(columns)): ws.write(row_num,col_num,columns[col_num],font_style)
+    columns= ['Название валюты', 'Курс ЦБРФ', 'Курс продажи', 'Курс покупки','Количество входной валюты', 'дата проведения']
 
-    font_style = xlwt.XFStyle()
+    for i in range(len(columns)): 
+        
+        ws.write(row_number,i,columns[i])
+
 
     rows = Food.objects.all().values_list('Name_Currency', 'Curs_BANK', 'Kurs_sell', 'Kurs_buy','number_of_currency', 'Date')
 
     for row in rows:
-        row_num += 1
+        row_number += 1
 
-        for col_num in range(len(row)):
-            ws.write(row_num,col_num,str(row[col_num]),font_style)
+        for i in range(len(row)):
+            ws.write(row_number,i,str(row[i]))
     wb.save(response)
 
     return response
@@ -71,37 +86,36 @@ def add_People(request):
 
 def index1(request):
     if request.method == "POST":
-        error = ''
         amount = float(request.POST.get('amount'))
-        currency_from = request.POST.get("currency_from")
         currency_to = request.POST.get("currency_to")
         radio = request.POST.get("oplata")
-        url = f"https://open.er-api.com/v6/latest/{currency_from}"
-        d = requests.get(url).json()
+        d = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()
         Date = datetime.datetime.today().replace(microsecond=0,second=0)
-        if d["result"] == "success":
-            ex_target = d["rates"][currency_to]
-            if radio == "sale":
-                result = ex_target * amount * 1.03
+        ex_target = d["Valute"][str(currency_to)]['Value']
+        if radio == "sale":
+            result = ex_target * amount * 1.03
+            currency_to = str("RUB")
 
-            else:
-                result = ex_target * amount * 1.01
+        else:
+            result = amount / ex_target * 1.01
 
-            result = "{:.2f}".format(result)
-            a = ex_target * amount * 1.03
-            b = ex_target * amount * 1.01
-            context = {
-                "result": result,
-                "currency_to": currency_to,
-                "currency_data": currency_data(),
-                "radio": radio
+        a = ex_target * amount * 1.03
+        b = amount / ex_target * 1.01
+        result = "{:.2f}".format(result)
+        a = "{:.2f}".format(a)
+        b = "{:.2f}".format(b)
+        context = {
+            "result": result,
+            "currency_to": currency_to,
+            "currency_data": currency_data(),
+            "radio": radio
 
-            }
-            currency_save = Food(Name_Currency=currency_to, Curs_BANK=ex_target, Kurs_sell=a, Kurs_buy=b,
-                                 number_of_currency=amount, Date= Date)
-            currency_save.save()
+        }
+        currency_save = Food(Name_Currency=currency_to, Curs_BANK=ex_target, Kurs_sell=a, Kurs_buy=b,
+                             number_of_currency=amount, Date= Date)
+        currency_save.save()
 
-            return render(request, "main/table.html", context)
+        return render(request, "main/table.html", context)
 
     return render(request, "main/table.html", {"currency_data": currency_data()})
 

@@ -12,21 +12,13 @@
 
 		 <div class="select-wrapper">
 			<!-- From options -->
-            <select name="currency_from" class="select">
+            <select name="currency_to" class="select">
                {% for c in currency_data %}
-               <option value="{{c.cc}}">{{c.name}}</option>
+               <option value="{{c.CharCode}}">{{c.Name}}</option>
                {% endfor %}
             </select>
          </div>
          <br>
-         <div class="select-wrapper">
-			<!-- To options -->
-            <select name="currency_to" class="select">
-               {% for c in currency_data %}
-               <option value="{{c.cc}}">{{c.name}}</option>
-               {% endfor %}
-            </select>
-         </div>
          <br>
           <p class = "text_vibor"><b>выберите операцию</b></p>
           <ul class = "inlineList">
